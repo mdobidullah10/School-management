@@ -60,28 +60,35 @@ export const ResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full bg-slate-50 min-h-screen">
+    <div className="flex flex-col w-full bg-[#F5F8FC] min-h-screen">
       {/* Header Banner - hidden when printing */}
-      <section className="bg-gradient-to-r from-[#0B2244] via-[#123B70] to-[#2167B2] text-white py-14 sm:py-16 relative overflow-hidden print:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-            <span className="text-xs uppercase tracking-widest font-bold text-[#FFB800]">
+      <section className="bg-gradient-to-r from-[#0B2345] via-[#123B70] to-[#2563A6] text-white py-14 sm:py-18 relative overflow-hidden print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-3" aria-label="Breadcrumb">
+            <a href="/" className="hover:text-[#F2B544] transition-colors">Home</a>
+            <span className="opacity-60">/</span>
+            <a href="/academics" className="hover:text-[#F2B544] transition-colors">Academics</a>
+            <span className="opacity-60">/</span>
+            <span className="text-[#F2B544] font-semibold">Results Portal</span>
+          </nav>
+
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-5 h-0.5 bg-[#F2B544] rounded-full" />
+            <span className="text-xs uppercase tracking-widest font-bold text-[#F2B544]">
               ACADEMIC EVALUATION & ARCHIVE
             </span>
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight">
             Online Examination Result Portal
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl mx-auto">
+          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl">
             Check student report cards, subject-wise marks, GPA calculations, and download verified academic transcripts.
           </p>
         </div>
       </section>
 
       {/* Search Filter Card - hidden when printing */}
-      <section className="py-8 bg-white border-b border-slate-200 print:hidden">
+      <section className="py-8 bg-white border-b border-[#E1E8F0] print:hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <form onSubmit={handleSearch} className="bg-slate-50 rounded-2xl p-6 border border-slate-200/90 shadow-sm">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">

@@ -40,21 +40,28 @@ export const StudyPlanPage: React.FC = () => {
   const progressPercent = totalTasks > 0 ? Math.round((completedCount / totalTasks) * 100) : 0;
 
   return (
-    <div className="flex flex-col w-full bg-slate-50 min-h-screen">
+    <div className="flex flex-col w-full bg-[#F5F8FC] min-h-screen">
       {/* Banner */}
-      <section className="bg-gradient-to-r from-[#0B2244] via-[#123B70] to-[#2167B2] text-white py-14 sm:py-16 relative overflow-hidden print:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-            <span className="text-xs uppercase tracking-widest font-bold text-[#FFB800]">
+      <section className="bg-gradient-to-r from-[#0B2345] via-[#123B70] to-[#2563A6] text-white py-14 sm:py-18 relative overflow-hidden print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-3" aria-label="Breadcrumb">
+            <a href="/" className="hover:text-[#F2B544] transition-colors">Home</a>
+            <span className="opacity-60">/</span>
+            <a href="/academics" className="hover:text-[#F2B544] transition-colors">Academics</a>
+            <span className="opacity-60">/</span>
+            <span className="text-[#F2B544] font-semibold">Study Plan</span>
+          </nav>
+
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-5 h-0.5 bg-[#F2B544] rounded-full" />
+            <span className="text-xs uppercase tracking-widest font-bold text-[#F2B544]">
               DAILY ACADEMIC ROADMAP
             </span>
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight">
             Daily Study Plan & Class Routine
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl mx-auto">
+          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl">
             Stay on track with daily classroom schedules, syllabus topics, teacher instructions, and homework assignments.
           </p>
         </div>

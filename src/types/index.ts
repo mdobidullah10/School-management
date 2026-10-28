@@ -83,6 +83,11 @@ export interface StaffMember {
   bio: string;
   qualifications: string;
   isDemo: boolean;
+  email?: string;
+  phone?: string;
+  experience?: string;
+  designation?: string;
+  subjects?: string[];
 }
 
 export interface FaqItem {

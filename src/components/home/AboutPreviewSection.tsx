@@ -1,94 +1,81 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Target, Eye, Compass } from 'lucide-react';
 
 export const AboutPreviewSection: React.FC = () => {
   return (
-    <section className="py-20 bg-[#F3F8FD]/60 relative">
+    <section className="py-16 lg:py-24 bg-white border-b border-[#E1E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Campus Image with golden accent backdrop */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Campus Photograph */}
           <div className="lg:col-span-6 relative">
-            {/* Golden decorative accent badge */}
-            <div className="absolute -top-4 -left-4 w-28 h-28 bg-[#FFB800] rounded-2xl -z-10" />
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white">
+            <div className="relative rounded-2xl overflow-hidden border border-[#E1E8F0] shadow-sm bg-slate-50">
               <img
                 src="/images/campus-main.jpg"
-                alt="Future Leaders School Modern Academic Campus"
+                alt="Future Leaders School Modern Campus Building in Bangladesh"
                 className="w-full h-[360px] sm:h-[420px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#123B70]/70 via-transparent to-transparent flex items-end p-6">
-                <div className="text-white">
-                  <p className="text-xs uppercase font-semibold text-[#FFB800] tracking-wider">
-                    Our Campus Environment
-                  </p>
-                  <p className="font-serif text-lg font-bold">
-                    A Safe, Inspiring Place to Learn and Grow
-                  </p>
-                </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B2345]/90 via-[#0B2345]/50 to-transparent p-6 text-white">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#F2B544] block">
+                  Campus & Community
+                </span>
+                <p className="font-serif text-lg font-bold">
+                  A Safe, Welcoming Place to Learn and Grow
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Narrative & Details */}
-          <div className="lg:col-span-6 space-y-6 text-left">
+          {/* Right Column: Information, Vision & Mission Summary */}
+          <div className="lg:col-span-6 space-y-5 text-left">
             <div>
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-                <span className="text-xs uppercase tracking-widest font-bold text-[#FFB800]">
-                  ABOUT US
+              <div className="inline-flex items-center gap-2 mb-2">
+                <span className="w-5 h-0.5 bg-[#F2B544] rounded-full" />
+                <span className="text-xs uppercase tracking-widest font-bold text-[#123B70]">
+                  ABOUT OUR INSTITUTION
                 </span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#123B70] tracking-tight leading-snug">
+              <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#0B2345] tracking-tight leading-snug">
                 Empowering Students to Become Future Leaders
               </h2>
             </div>
 
-            <p className="text-base text-[#65758B] leading-relaxed">
-              At Future Leaders School, we believe that every child has the potential to make a difference. Our mission is to provide a nurturing, innovative, and inclusive learning environment where students can grow academically, socially, and emotionally — and build the skills they need to lead in an ever-changing world.
+            <p className="text-sm sm:text-base text-[#66758A] leading-relaxed">
+              At Future Leaders School, we believe that education extends beyond textbooks. We provide a balanced, inclusive learning environment where curiosity is nurtured, values are cultivated, and every student is guided toward intellectual independence and responsible leadership.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-[#2167B2] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-[#123B70]">Academic Rigor</h4>
-                  <p className="text-xs text-[#65758B]">Balanced, conceptual, and inquiry-led curriculum.</p>
+            {/* Vision & Mission Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+              <div className="p-4 rounded-xl bg-[#F5F8FC] border border-[#E1E8F0]">
+                <div className="w-7 h-7 rounded-lg bg-[#123B70] text-[#F2B544] flex items-center justify-center mb-2">
+                  <Eye className="w-4 h-4" />
                 </div>
+                <h4 className="text-xs font-bold text-[#0B2345] uppercase tracking-wide">Our Vision</h4>
+                <p className="text-xs text-[#66758A] mt-1 leading-relaxed">
+                  To be a premier school nurturing creative, ethical, and compassionate leaders equipped for global challenges.
+                </p>
               </div>
 
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-[#2167B2] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-[#123B70]">Character & Ethics</h4>
-                  <p className="text-xs text-[#65758B]">Instilling honesty, empathy, and social responsibility.</p>
+              <div className="p-4 rounded-xl bg-[#F5F8FC] border border-[#E1E8F0]">
+                <div className="w-7 h-7 rounded-lg bg-[#2563A6] text-white flex items-center justify-center mb-2">
+                  <Target className="w-4 h-4" />
                 </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-[#2167B2] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-[#123B70]">Creative Expression</h4>
-                  <p className="text-xs text-[#65758B]">Thriving arts, speech, music, and debate programs.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-[#2167B2] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-[#123B70]">Individual Mentorship</h4>
-                  <p className="text-xs text-[#65758B]">Low student-to-teacher ratio ensuring personal focus.</p>
-                </div>
+                <h4 className="text-xs font-bold text-[#0B2345] uppercase tracking-wide">Our Mission</h4>
+                <p className="text-xs text-[#66758A] mt-1 leading-relaxed">
+                  Fostering academic excellence, holistic development, critical thinking, and respectful citizenship.
+                </p>
               </div>
             </div>
 
-            <div className="pt-4">
+            {/* Learn More Button */}
+            <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 bg-[#123B70] hover:bg-[#2167B2] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all shadow-sm hover:shadow active:scale-95"
+                className="inline-flex items-center gap-2 bg-[#123B70] hover:bg-[#2563A6] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-xs"
               >
+                <Compass className="w-4 h-4 text-[#F2B544]" />
                 <span>Learn More About Us</span>
-                <ArrowRight className="w-4 h-4 text-[#FFB800]" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#F2B544]" />
               </Link>
             </div>
           </div>

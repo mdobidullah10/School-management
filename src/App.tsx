@@ -15,6 +15,7 @@ import { PortalPage } from './pages/PortalPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { StudyPlanPage } from './pages/StudyPlanPage';
 import { AdminPage } from './pages/AdminPage';
+import { TeachersPage } from './pages/TeachersPage';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
@@ -31,6 +32,8 @@ const AppContent: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/academics" element={<AcademicsPage />} />
+          <Route path="/teachers" element={<TeachersPage />} />
+          <Route path="/faculty" element={<TeachersPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/news" element={<NewsEventsPage />} />

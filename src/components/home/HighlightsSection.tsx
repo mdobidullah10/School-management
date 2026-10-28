@@ -1,48 +1,84 @@
 import React from 'react';
-import { GraduationCap, Users, Lightbulb, Trophy, HeartHandshake } from 'lucide-react';
-import { schoolHighlights } from '../../data/schoolData';
+import { Link } from 'react-router-dom';
+import { FileCheck, Bell, Calendar, Users, Phone, ArrowUpRight } from 'lucide-react';
 
-const iconMap: Record<string, React.ReactNode> = {
-  GraduationCap: <GraduationCap className="w-6 h-6 text-[#123B70]" />,
-  Users: <Users className="w-6 h-6 text-[#10B981]" />,
-  Lightbulb: <Lightbulb className="w-6 h-6 text-[#FFB800]" />,
-  Trophy: <Trophy className="w-6 h-6 text-[#8B5CF6]" />,
-  HeartHandshake: <HeartHandshake className="w-6 h-6 text-[#EC4899]" />,
-};
-
-const bgMap: Record<string, string> = {
-  GraduationCap: 'bg-blue-50 group-hover:bg-[#123B70] group-hover:text-white',
-  Users: 'bg-emerald-50 group-hover:bg-[#10B981] group-hover:text-white',
-  Lightbulb: 'bg-amber-50 group-hover:bg-[#FFB800] group-hover:text-[#123B70]',
-  Trophy: 'bg-purple-50 group-hover:bg-[#8B5CF6] group-hover:text-white',
-  HeartHandshake: 'bg-pink-50 group-hover:bg-[#EC4899] group-hover:text-white',
-};
+const INFO_CARDS = [
+  {
+    title: 'Admission Information',
+    description: 'Eligibility, application steps & online enrollment',
+    path: '/admissions',
+    icon: FileCheck,
+    tag: 'Admissions 2026–27',
+  },
+  {
+    title: 'Latest Notices',
+    description: 'Campus circulars, announcements & exam notices',
+    path: '/news',
+    icon: Bell,
+    tag: 'Notice Board',
+  },
+  {
+    title: 'Academic Calendar',
+    description: 'Class routines, daily study plans & homework',
+    path: '/study-plan',
+    icon: Calendar,
+    tag: 'Curriculum & Routine',
+  },
+  {
+    title: 'Teachers & Staff',
+    description: 'Certified faculty directory & department coordinators',
+    path: '/teachers',
+    icon: Users,
+    tag: 'Faculty Directory',
+  },
+  {
+    title: 'Contact the School',
+    description: 'Campus address, visiting hours & admission hotline',
+    path: '/contact',
+    icon: Phone,
+    tag: 'Helpdesk & Inquiries',
+  },
+];
 
 export const HighlightsSection: React.FC = () => {
   return (
-    <section className="py-12 bg-white relative -mt-6 z-10">
+    <section className="py-8 bg-white border-b border-[#E1E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
-          {schoolHighlights.map((item) => (
-            <div
-              key={item.id}
-              className="group bg-white rounded-xl p-5 border border-slate-100 shadow-xs hover:shadow-md hover:border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
-            >
-              <div
-                className={`w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-colors duration-300 ${
-                  bgMap[item.iconName] || 'bg-blue-50'
-                }`}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          {INFO_CARDS.map((card, idx) => {
+            const Icon = card.icon;
+            return (
+              <Link
+                key={idx}
+                to={card.path}
+                className="group p-4 rounded-xl bg-[#F5F8FC] border border-[#E1E8F0] hover:border-[#123B70] hover:bg-white hover:shadow-sm transition-all duration-150 flex flex-col justify-between"
               >
-                {iconMap[item.iconName] || <GraduationCap className="w-6 h-6 text-[#123B70]" />}
-              </div>
-              <h3 className="font-serif font-bold text-base text-[#123B70] group-hover:text-[#2167B2] transition-colors mb-1.5">
-                {item.title}
-              </h3>
-              <p className="text-xs leading-relaxed text-[#65758B]">
-                {item.description}
-              </p>
-            </div>
-          ))}
+                <div>
+                  <div className="flex items-center justify-between mb-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-white border border-[#E1E8F0] group-hover:border-[#123B70] group-hover:bg-[#123B70] flex items-center justify-center transition-colors">
+                      <Icon className="w-4 h-4 text-[#123B70] group-hover:text-[#F2B544] transition-colors" />
+                    </div>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#123B70] transition-colors" />
+                  </div>
+
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#2563A6] block mb-0.5">
+                    {card.tag}
+                  </span>
+                  <h3 className="font-serif font-bold text-sm text-[#18263A] group-hover:text-[#123B70] transition-colors leading-snug">
+                    {card.title}
+                  </h3>
+                  <p className="text-xs text-[#66758A] mt-1 leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
+
+                <div className="pt-3 mt-2 border-t border-slate-200/60 flex items-center gap-1 text-[11px] font-bold text-[#123B70]">
+                  <span>Explore</span>
+                  <span className="text-[#F2B544] font-black group-hover:translate-x-0.5 transition-transform">→</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

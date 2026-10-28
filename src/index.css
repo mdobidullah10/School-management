@@ -1,12 +1,23 @@
 @import "tailwindcss";
 
 @theme {
+  --color-primary-navy: #123B70;
+  --color-deep-navy: #0B2345;
+  --color-secondary-blue: #2563A6;
+  --color-golden-accent: #F2B544;
+  --color-golden-hover: #E5A736;
+  --color-light-bg: #F5F8FC;
+  --color-main-text: #18263A;
+  --color-secondary-text: #66758A;
+  --color-border-subtle: #E1E8F0;
+
   --color-school-primary: #123B70;
-  --color-school-secondary: #2167B2;
-  --color-school-accent: #FFB800;
-  --color-school-light: #F3F8FD;
+  --color-school-secondary: #2563A6;
+  --color-school-accent: #F2B544;
+  --color-school-light: #F5F8FC;
   --color-school-text: #18263A;
-  --color-school-muted: #65758B;
+  --color-school-muted: #66758A;
+
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -15,7 +26,30 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
-    color: var(--color-school-text);
+    color: var(--color-main-text);
     background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  ::selection {
+    background-color: #123B70;
+    color: #ffffff;
+  }
+}
+
+/* Custom scrollbar for clean UI */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F8FC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
 }

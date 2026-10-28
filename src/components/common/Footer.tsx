@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0B2244] text-white pt-16 pb-8 border-t border-slate-800">
+    <footer className="bg-[#0B2345] text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
               Future Leaders School is dedicated to nurturing academic excellence, inspiring creativity, and shaping ethical, confident global leaders in Bangladesh.
             </p>
             <div className="pt-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-[#FFB800] block mb-2">
+              <span className="text-xs uppercase tracking-wider font-semibold text-[#F2B544] block mb-2">
                 Connect With Our Community
               </span>
               <div className="flex items-center gap-3">
@@ -40,8 +40,8 @@ export const Footer: React.FC = () => {
                   href={schoolInfo.socialLinks.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB800] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
-                  aria-label="Facebook placeholder"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#F2B544] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
+                  aria-label="Facebook"
                 >
                   <FacebookIcon className="w-4 h-4" />
                 </a>
@@ -49,8 +49,8 @@ export const Footer: React.FC = () => {
                   href={schoolInfo.socialLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB800] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
-                  aria-label="Twitter placeholder"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#F2B544] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
+                  aria-label="Twitter"
                 >
                   <TwitterIcon className="w-4 h-4" />
                 </a>
@@ -58,8 +58,8 @@ export const Footer: React.FC = () => {
                   href={schoolInfo.socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB800] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
-                  aria-label="Instagram placeholder"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#F2B544] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
+                  aria-label="Instagram"
                 >
                   <InstagramIcon className="w-4 h-4" />
                 </a>
@@ -67,8 +67,8 @@ export const Footer: React.FC = () => {
                   href={schoolInfo.socialLinks.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB800] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
-                  aria-label="YouTube placeholder"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#F2B544] hover:text-[#123B70] flex items-center justify-center text-slate-300 transition-all"
+                  aria-label="YouTube"
                 >
                   <YoutubeIcon className="w-4 h-4" />
                 </a>
@@ -83,58 +83,43 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-sm text-slate-300">
               <li>
-                <Link to="/" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Home
+                <Link to="/" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> About Us
+                <Link to="/about" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> About Us
                 </Link>
               </li>
               <li>
-                <Link to="/admissions" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Admissions 2026–27
+                <Link to="/teachers" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Teachers & Staff
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Campus Gallery
+                <Link to="/admissions" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Admissions 2026–27
                 </Link>
               </li>
               <li>
-                <Link to="/news" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> News & Events
+                <Link to="/gallery" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Campus Gallery
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Contact & Directions
+                <Link to="/news" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Notices & Circulars
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-[#FFB800] hover:underline font-bold transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Super Admin Dashboard
+                <Link to="/contact" className="hover:text-[#F2B544] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Contact & Directions
                 </Link>
               </li>
               <li>
-                <Link to="/portal" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#FFB800] text-xs">›</span> Student & Parent Portal
-                </Link>
-              </li>
-              <li>
-                <Link to="/results" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5 font-semibold text-[#FFB800]">
-                  <span className="text-[#FFB800] text-xs">›</span> Online Result Checker
-                </Link>
-              </li>
-              <li>
-                <Link to="/study-plan" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5 font-semibold text-[#FFB800]">
-                  <span className="text-[#FFB800] text-xs">›</span> Daily Study Plan
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-xs text-amber-400 font-bold">
-                  <span className="text-[#FFB800] text-xs">›</span> Super Admin Console
+                <Link to="/dashboard" className="text-[#F2B544] hover:underline font-bold transition-colors flex items-center gap-1.5">
+                  <span className="text-[#F2B544] text-xs">›</span> Super Admin Dashboard
                 </Link>
               </li>
             </ul>

@@ -1,84 +1,103 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, Phone, Mail, Clock, Award, Calendar, ShieldAlert } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ArrowRight,
+  Phone,
+  Mail,
+  Clock,
+  Award,
+  Calendar,
+  ShieldCheck,
+  ChevronDown,
+  BookOpen,
+} from 'lucide-react';
 import { Logo } from './Logo';
 import { schoolInfo } from '../../data/schoolData';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [academicsDropdown, setAcademicsDropdown] = useState(false);
+  const [mobileAcademicsOpen, setMobileAcademicsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Close mobile menu on route change
+  // Close mobile menu and dropdown on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setAcademicsDropdown(false);
   }, [location.pathname]);
 
-  // Handle scroll effect for shadow and blur
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Academics', path: '/academics' },
-    { name: 'Study Plan', path: '/study-plan' },
-    { name: 'Results', path: '/results' },
-    { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Admissions', path: '/admissions' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'News & Events', path: '/news' },
-    { name: 'Contact', path: '/contact' },
-  ];
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setAcademicsDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const isAcademicsActive =
+    location.pathname === '/academics' ||
+    location.pathname === '/study-plan' ||
+    location.pathname === '/results';
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white transition-all duration-300">
-      {/* Top Notification / Utility Bar */}
-      <div className="bg-[#123B70] text-white text-xs py-2 px-4 border-b border-white/10 hidden md:block">
+    <header className="sticky top-0 z-40 w-full bg-white transition-all duration-200">
+      {/* Top Utility Information Bar */}
+      <div className="bg-[#123B70] text-white text-xs py-2 px-4 border-b border-white/10 hidden lg:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-slate-200">
-              <Phone className="w-3.5 h-3.5 text-[#FFB800]" />
+              <Phone className="w-3.5 h-3.5 text-[#F2B544]" />
               <span>{schoolInfo.phonePlaceholder}</span>
             </span>
             <span className="flex items-center gap-1.5 text-slate-200">
-              <Mail className="w-3.5 h-3.5 text-[#FFB800]" />
+              <Mail className="w-3.5 h-3.5 text-[#F2B544]" />
               <span>{schoolInfo.emailPlaceholder}</span>
             </span>
             <span className="flex items-center gap-1.5 text-slate-200">
-              <Clock className="w-3.5 h-3.5 text-[#FFB800]" />
+              <Clock className="w-3.5 h-3.5 text-[#F2B544]" />
               <span>Sun – Thu: 8:00 AM – 4:00 PM</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4 text-[11px]">
             <Link
               to="/results"
-              className="text-slate-200 hover:text-[#FFB800] transition-colors flex items-center gap-1 font-medium"
+              className="text-slate-200 hover:text-[#F2B544] transition-colors flex items-center gap-1 font-medium"
             >
-              <Award className="w-3.5 h-3.5 text-[#FFB800]" />
+              <Award className="w-3.5 h-3.5 text-[#F2B544]" />
               <span>Result Checker</span>
             </Link>
-            <span className="text-white/30">|</span>
+            <span className="text-white/20">|</span>
             <Link
               to="/study-plan"
-              className="text-slate-200 hover:text-[#FFB800] transition-colors flex items-center gap-1 font-medium"
+              className="text-slate-200 hover:text-[#F2B544] transition-colors flex items-center gap-1 font-medium"
             >
-              <Calendar className="w-3.5 h-3.5 text-[#FFB800]" />
+              <Calendar className="w-3.5 h-3.5 text-[#F2B544]" />
               <span>Daily Study Plan</span>
             </Link>
-            <span className="text-white/30">|</span>
+            <span className="text-white/20">|</span>
             <Link
-              to="/admin"
-              className="bg-amber-400 hover:bg-amber-300 text-[#123B70] font-extrabold px-2.5 py-0.5 rounded text-[11px] flex items-center gap-1 transition-colors shadow-xs"
+              to="/dashboard"
+              className="bg-[#F2B544] hover:bg-[#E5A736] text-[#123B70] font-extrabold px-2.5 py-0.5 rounded text-[11px] flex items-center gap-1 transition-all shadow-xs"
             >
-              <ShieldAlert className="w-3 h-3 text-[#123B70]" />
-              <span>Super Admin</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-[#123B70]" />
+              <span>Admin Dashboard</span>
             </Link>
           </div>
         </div>
@@ -86,130 +105,323 @@ export const Header: React.FC = () => {
 
       {/* Main Navbar */}
       <div
-        className={`w-full bg-white transition-shadow duration-300 ${
-          scrolled ? 'shadow-md shadow-slate-900/5 py-2' : 'border-b border-slate-100 py-3'
+        className={`w-full bg-white transition-all duration-200 ${
+          scrolled ? 'shadow-md py-2 border-b border-[#E1E8F0]' : 'border-b border-[#E1E8F0] py-3'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Logo on Left */}
           <Logo size="md" />
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-1" aria-label="Main Navigation">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-2.5 py-2 rounded-md text-xs lg:text-sm font-medium transition-colors relative ${
-                    isActive
-                      ? 'text-[#123B70] font-semibold after:absolute after:bottom-0 after:left-2.5 after:right-2.5 after:h-0.5 after:bg-[#FFB800] after:rounded-full'
-                      : 'text-slate-600 hover:text-[#123B70] hover:bg-slate-50'
-                  }`
-                }
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              About Us
+            </NavLink>
+
+            {/* Academics Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setAcademicsDropdown(!academicsDropdown)}
+                className={`px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors flex items-center gap-1 cursor-pointer ${
+                  isAcademicsActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`}
+                aria-expanded={academicsDropdown}
               >
-                {link.name}
-              </NavLink>
-            ))}
+                <span>Academics</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${academicsDropdown ? 'rotate-180' : ''}`} />
+              </button>
+
+              {academicsDropdown && (
+                <div className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#E1E8F0] p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <Link
+                    to="/academics"
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-[#F5F8FC] transition-colors"
+                  >
+                    <BookOpen className="w-4 h-4 text-[#123B70] mt-0.5 shrink-0" />
+                    <div>
+                      <span className="font-bold text-xs text-[#18263A] block">Curriculum & Programs</span>
+                      <span className="text-[11px] text-[#66758A]">Playgroup to Secondary tracks</span>
+                    </div>
+                  </Link>
+
+                  <Link
+                    to="/study-plan"
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-[#F5F8FC] transition-colors"
+                  >
+                    <Calendar className="w-4 h-4 text-[#2563A6] mt-0.5 shrink-0" />
+                    <div>
+                      <span className="font-bold text-xs text-[#18263A] block">Daily Study Plan</span>
+                      <span className="text-[11px] text-[#66758A]">Class schedule & homework tracker</span>
+                    </div>
+                  </Link>
+
+                  <Link
+                    to="/results"
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-[#F5F8FC] transition-colors"
+                  >
+                    <Award className="w-4 h-4 text-[#F2B544] mt-0.5 shrink-0" />
+                    <div>
+                      <span className="font-bold text-xs text-[#18263A] block">Result Portal & Transcripts</span>
+                      <span className="text-[11px] text-[#66758A]">Online report cards & GPA lookup</span>
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <NavLink
+              to="/teachers"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Teachers & Staff
+            </NavLink>
+
+            <NavLink
+              to="/admissions"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Admissions
+            </NavLink>
+
+            <NavLink
+              to="/news"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Notices
+            </NavLink>
+
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Gallery
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-xs lg:text-[13px] font-semibold transition-colors ${
+                  isActive
+                    ? 'text-[#123B70] bg-[#F5F8FC] border-b-2 border-[#123B70]'
+                    : 'text-[#18263A] hover:text-[#123B70] hover:bg-slate-50'
+                }`
+              }
+            >
+              Contact
+            </NavLink>
           </nav>
 
-          {/* Action Button & Admin Pill */}
-          <div className="hidden xl:flex items-center gap-3">
+          {/* Action CTAs on Right */}
+          <div className="hidden xl:flex items-center gap-2.5">
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#123B70] text-xs font-bold px-3.5 py-2.5 rounded-full shadow-xs transition-all duration-200"
+              className="inline-flex items-center gap-1.5 bg-[#F2B544] hover:bg-[#E5A736] text-[#123B70] text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs transition-colors"
             >
-              <ShieldAlert className="w-3.5 h-3.5 text-[#123B70]" />
-              <span>Admin Dashboard</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-[#123B70]" />
+              <span>Dashboard</span>
             </Link>
 
             <Link
               to="/admissions"
-              className="inline-flex items-center gap-2 bg-[#123B70] hover:bg-[#2167B2] text-white text-xs lg:text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#FFB800]"
+              className="inline-flex items-center gap-1.5 bg-[#123B70] hover:bg-[#2563A6] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-xs hover:shadow transition-all"
             >
               <span>Apply Now</span>
-              <ArrowRight className="w-4 h-4 text-[#FFB800]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#F2B544]" />
             </Link>
           </div>
 
-          {/* Tablet & Mobile Menu Button */}
+          {/* Mobile Right Action + Hamburger */}
           <div className="flex xl:hidden items-center gap-2">
             <Link
               to="/dashboard"
-              className="inline-flex items-center text-[11px] font-bold bg-amber-400 text-[#123B70] px-2.5 py-1 rounded-full shadow-xs"
+              className="inline-flex items-center text-[11px] font-bold bg-[#F2B544] text-[#123B70] px-2.5 py-1 rounded-lg shadow-xs"
             >
               Dashboard
             </Link>
             <Link
-              to="/results"
-              className="inline-flex items-center text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-1 rounded-full"
-            >
-              Results
-            </Link>
-            <Link
               to="/admissions"
-              className="inline-flex items-center text-xs font-semibold bg-[#123B70] text-white px-3 py-1.5 rounded-full"
+              className="inline-flex items-center text-xs font-semibold bg-[#123B70] text-white px-3 py-1.5 rounded-lg"
             >
               Apply
             </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:text-[#123B70] hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#123B70]"
-              aria-expanded={mobileMenuOpen}
+              className="p-1.5 rounded-lg text-[#18263A] hover:bg-slate-100 transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-[#123B70]" /> : <Menu className="w-6 h-6 text-[#123B70]" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 shadow-xl animate-in slide-in-from-top-2 duration-200 max-h-[85vh] overflow-y-auto">
-          <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-3 py-2.5 rounded-lg text-base font-medium transition-colors ${
-                    isActive
-                      ? 'bg-[#F3F8FD] text-[#123B70] font-semibold border-l-4 border-[#FFB800]'
-                      : 'text-slate-700 hover:bg-slate-50'
-                  }`
-                }
+        <div className="xl:hidden border-b border-[#E1E8F0] bg-white px-4 pt-3 pb-6 shadow-xl max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2">
+          <div className="flex flex-col space-y-1 text-sm font-semibold">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              About Us
+            </NavLink>
+
+            {/* Mobile Academics Submenu */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileAcademicsOpen(!mobileAcademicsOpen)}
+                className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-[#18263A]"
               >
-                {link.name}
-              </NavLink>
-            ))}
+                <span>Academics</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileAcademicsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {mobileAcademicsOpen && (
+                <div className="pl-4 pr-2 py-1 space-y-1 bg-slate-50 rounded-xl my-1 text-xs">
+                  <Link to="/academics" className="block py-2 px-3 text-[#18263A] hover:text-[#123B70] font-medium">
+                    • Curriculum & Programs
+                  </Link>
+                  <Link to="/study-plan" className="block py-2 px-3 text-[#18263A] hover:text-[#123B70] font-medium">
+                    • Daily Study Plan & Homework
+                  </Link>
+                  <Link to="/results" className="block py-2 px-3 text-[#18263A] hover:text-[#123B70] font-medium">
+                    • Online Result Portal & Transcripts
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <NavLink
+              to="/teachers"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Teachers & Staff
+            </NavLink>
+
+            <NavLink
+              to="/admissions"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Admissions
+            </NavLink>
+
+            <NavLink
+              to="/news"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Notices & Circulars
+            </NavLink>
+
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Gallery & Campus Tour
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `px-3.5 py-2 rounded-xl ${isActive ? 'bg-[#F5F8FC] text-[#123B70] font-bold border-l-4 border-[#123B70]' : 'text-[#18263A]'}`
+              }
+            >
+              Contact Us
+            </NavLink>
+
             <Link
-              to="/admin"
-              className="px-3 py-2.5 rounded-lg text-base font-bold text-[#123B70] bg-amber-50 flex items-center justify-between"
+              to="/dashboard"
+              className="px-3.5 py-2.5 rounded-xl font-bold bg-[#F2B544]/20 text-[#123B70] flex items-center justify-between border border-[#F2B544]/50 mt-2"
             >
               <span className="flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-amber-600" />
-                <span>Super Admin Panel</span>
+                <ShieldCheck className="w-4 h-4 text-[#123B70]" />
+                <span>Super Admin Dashboard</span>
               </span>
-              <span className="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-extrabold uppercase">
-                Staff Only
+              <span className="text-[10px] bg-[#123B70] text-white px-2 py-0.5 rounded font-bold">
+                Admin
               </span>
             </Link>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-3">
+          <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
             <Link
               to="/admissions"
-              className="w-full flex items-center justify-center gap-2 bg-[#123B70] text-white py-3 rounded-lg font-semibold text-center hover:bg-[#2167B2] transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-[#123B70] text-white py-2.5 rounded-xl font-bold text-center text-xs"
             >
               <span>Apply for Admission</span>
-              <ArrowRight className="w-4 h-4 text-[#FFB800]" />
+              <ArrowRight className="w-4 h-4 text-[#F2B544]" />
             </Link>
-            <div className="text-xs text-slate-500 text-center space-y-1 mt-2">
-              <p>Hotline: {schoolInfo.phonePlaceholder}</p>
-              <p>{schoolInfo.emailPlaceholder}</p>
-            </div>
           </div>
         </div>
       )}

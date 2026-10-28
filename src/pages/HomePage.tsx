@@ -2,46 +2,38 @@ import React from 'react';
 import { HeroSection } from '../components/home/HeroSection';
 import { HighlightsSection } from '../components/home/HighlightsSection';
 import { AboutPreviewSection } from '../components/home/AboutPreviewSection';
-import { WhyChooseUsSection } from '../components/home/WhyChooseUsSection';
 import { ProgramsPreviewSection } from '../components/home/ProgramsPreviewSection';
-import { LearningExperienceSection } from '../components/home/LearningExperienceSection';
-import { AdmissionsCtaBanner } from '../components/home/AdmissionsCtaBanner';
-import { GalleryPreviewSection } from '../components/home/GalleryPreviewSection';
+import { TeachersPreviewSection } from '../components/home/TeachersPreviewSection';
 import { NewsPreviewSection } from '../components/home/NewsPreviewSection';
-import { TestimonialsSection } from '../components/home/TestimonialsSection';
+import { GalleryPreviewSection } from '../components/home/GalleryPreviewSection';
+import { AdmissionsCtaBanner } from '../components/home/AdmissionsCtaBanner';
 
 export const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col w-full">
-      {/* A. Hero Section */}
+      {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* B. School Highlights (5 cards) */}
+      {/* 2. Important Information Cards (Admissions, Notices, Calendar, Teachers, Contact) */}
       <HighlightsSection />
 
-      {/* C. About Our School */}
+      {/* 3. About the School (2-column layout, photo, vision/mission, learn more) */}
       <AboutPreviewSection />
 
-      {/* D. Why Choose Us */}
-      <WhyChooseUsSection />
-
-      {/* E. Academic Programs (4 cards) */}
+      {/* 4. Academic Information (Program cards: Kindergarten, Primary, Middle, Secondary) */}
       <ProgramsPreviewSection />
 
-      {/* F. Learning Experience */}
-      <LearningExperienceSection />
+      {/* 5. Teachers & Staff Preview (Compact educator cards + View All link) */}
+      <TeachersPreviewSection />
 
-      {/* G. Admissions Call to Action */}
-      <AdmissionsCtaBanner />
-
-      {/* H. Campus Gallery Preview */}
-      <GalleryPreviewSection />
-
-      {/* I. News and Events */}
+      {/* 6. Notices and Announcements (Official circulars & upcoming calendar) */}
       <NewsPreviewSection />
 
-      {/* J. Testimonials */}
-      <TestimonialsSection />
+      {/* 7. Events and Gallery Preview (Consistent image aspect ratio & lightbox) */}
+      <GalleryPreviewSection />
+
+      {/* 8. Final Call to Action (Admission guidance & inquiry links) */}
+      <AdmissionsCtaBanner />
     </div>
   );
 };

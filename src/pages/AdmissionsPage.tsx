@@ -118,41 +118,42 @@ export const AdmissionsPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full">
-      {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-[#0B2244] via-[#123B70] to-[#2167B2] text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-            <span className="text-xs uppercase tracking-widest font-bold text-[#FFB800]">
+    <div className="flex flex-col w-full bg-white">
+      {/* Hero Banner with Breadcrumbs */}
+      <section className="bg-gradient-to-r from-[#0B2345] via-[#123B70] to-[#2563A6] text-white py-14 sm:py-20 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-3" aria-label="Breadcrumb">
+            <a href="/" className="hover:text-[#F2B544] transition-colors">Home</a>
+            <span className="opacity-60">/</span>
+            <span className="text-[#F2B544] font-semibold">Admissions</span>
+          </nav>
+
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-5 h-0.5 bg-[#F2B544] rounded-full" />
+            <span className="text-xs uppercase tracking-widest font-bold text-[#F2B544]">
               JOIN OUR SCHOOL FAMILY
             </span>
-            <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight">
             Admissions & Enrollment
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-200 max-w-2xl mx-auto">
+          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl">
             Take the first step toward your child’s transformative educational journey at Future Leaders School. Applications are now welcomed for the 2026–2027 academic session.
           </p>
         </div>
       </section>
 
       {/* 4-Step Process Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-[#F5F8FC] border-b border-[#E1E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-              <span className="text-xs uppercase tracking-widest font-bold text-[#FFB800]">
-                ADMISSION PROCESS
-              </span>
-              <span className="w-6 h-0.5 bg-[#FFB800] rounded-full" />
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#123B70]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#123B70] block mb-1">
+              ADMISSION PROCESS
+            </span>
+            <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#0B2345]">
               Four Simple Steps to Enroll
             </h2>
-            <p className="mt-3 text-base text-[#65758B]">
+            <p className="mt-2 text-xs sm:text-sm text-[#66758A]">
               Our transparent and supportive admissions procedure is crafted to help families smoothly transition their children into school.
             </p>
           </div>
@@ -161,16 +162,16 @@ export const AdmissionsPage: React.FC = () => {
             {admissionsSteps.map((step) => (
               <div
                 key={step.step}
-                className="bg-white rounded-2xl p-7 border border-slate-100 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group relative"
+                className="bg-white rounded-2xl p-6 border border-[#E1E8F0] shadow-xs hover:shadow-md hover:border-[#123B70] transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <span className="font-serif text-3xl font-extrabold text-[#FFB800]/70 group-hover:text-[#FFB800] transition-colors block mb-3">
+                  <span className="font-serif text-3xl font-extrabold text-[#F2B544] block mb-2">
                     {step.step}
                   </span>
-                  <h3 className="font-serif font-bold text-lg text-[#123B70] mb-2 group-hover:text-[#2167B2] transition-colors">
+                  <h3 className="font-serif font-bold text-base text-[#0B2345] mb-2 group-hover:text-[#123B70] transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-xs text-[#65758B] leading-relaxed">
+                  <p className="text-xs text-[#66758A] leading-relaxed">
                     {step.description}
                   </p>
                 </div>
