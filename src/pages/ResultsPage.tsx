@@ -253,23 +253,40 @@ export const ResultsPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Student Metadata Card */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#F3F8FD] rounded-2xl p-4 sm:p-5 mb-6 text-xs border border-blue-100/80">
-                <div>
-                  <span className="text-slate-400 font-semibold block uppercase text-[10px]">Student Name</span>
-                  <strong className="text-sm font-bold text-[#123B70]">{result.studentName}</strong>
-                </div>
-                <div>
-                  <span className="text-slate-400 font-semibold block uppercase text-[10px]">Student ID / Roll</span>
-                  <span className="font-bold text-slate-800">{result.studentId} (Roll {result.rollNumber})</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 font-semibold block uppercase text-[10px]">Class & Section</span>
-                  <span className="font-bold text-slate-800">{result.grade} • {result.section}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 font-semibold block uppercase text-[10px]">Attendance Rate</span>
-                  <span className="font-bold text-emerald-700">{result.attendance}</span>
+              {/* Student Metadata Card with Photo */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-[#F3F8FD] rounded-2xl p-4 sm:p-5 mb-6 text-xs border border-blue-100/80">
+                {result.studentPhoto ? (
+                  <img
+                    src={result.studentPhoto}
+                    alt={result.studentName}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-white shadow-sm shrink-0 bg-white"
+                  />
+                ) : (
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#123B70] text-white flex items-center justify-center font-serif text-2xl font-bold shadow-sm shrink-0 border-2 border-white">
+                    {result.studentName.charAt(0)}
+                  </div>
+                )}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1 w-full">
+                  <div>
+                    <span className="text-slate-400 font-semibold block uppercase text-[10px]">Student Name</span>
+                    <strong className="text-sm sm:text-base font-bold text-[#123B70] block leading-tight">{result.studentName}</strong>
+                    {result.gender && <span className="text-[11px] text-slate-500 font-medium">({result.gender})</span>}
+                  </div>
+                  <div>
+                    <span className="text-slate-400 font-semibold block uppercase text-[10px]">Student ID / Roll</span>
+                    <span className="font-bold text-slate-800 block text-xs sm:text-sm">{result.studentId}</span>
+                    <span className="text-[11px] font-semibold text-[#2167B2]">Roll: {result.rollNumber}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 font-semibold block uppercase text-[10px]">Class & Section</span>
+                    <span className="font-bold text-slate-800 block text-xs sm:text-sm">{result.grade}</span>
+                    <span className="text-[11px] text-slate-500">{result.section}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 font-semibold block uppercase text-[10px]">Attendance Rate</span>
+                    <span className="font-bold text-emerald-700 block text-xs sm:text-sm">{result.attendance}</span>
+                    {result.parentName && <span className="text-[10px] text-slate-500">Guardian: {result.parentName}</span>}
+                  </div>
                 </div>
               </div>
 

@@ -124,6 +124,10 @@ export interface StudentResult {
   studentId: string;
   rollNumber: string;
   studentName: string;
+  studentPhoto?: string;
+  gender?: string;
+  parentName?: string;
+  contactNumber?: string;
   grade: string;
   section: string;
   examName: string;
