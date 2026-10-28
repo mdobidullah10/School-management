@@ -897,3 +897,121 @@ export const initialAdminApplications: AdminApplicationItem[] = [
   },
 ];
 
+export const initialFeeRecords = [
+  {
+    id: 'fee-101',
+    invoiceNo: 'INV-2026-101',
+    studentId: 'FLS-2026-101',
+    studentName: 'Tahmid Hossain',
+    rollNumber: '101',
+    grade: 'Grade 7',
+    month: 'October 2026',
+    feeType: 'Tuition Fee' as const,
+    amount: 6500,
+    paidAmount: 6500,
+    dueDate: '2026-10-10',
+    status: 'Paid' as const,
+    paymentMethod: 'bKash' as const,
+    transactionId: 'TRX-9824A10',
+    paymentDate: '2026-10-05',
+  },
+  {
+    id: 'fee-102',
+    invoiceNo: 'INV-2026-102',
+    studentId: 'FLS-2026-102',
+    studentName: 'Samira Anjum',
+    rollNumber: '102',
+    grade: 'Grade 7',
+    month: 'October 2026',
+    feeType: 'Tuition Fee' as const,
+    amount: 6500,
+    paidAmount: 6500,
+    dueDate: '2026-10-10',
+    status: 'Paid' as const,
+    paymentMethod: 'Nagad' as const,
+    transactionId: 'TRX-8734B22',
+    paymentDate: '2026-10-06',
+  },
+  {
+    id: 'fee-103',
+    invoiceNo: 'INV-2026-103',
+    studentId: 'FLS-2026-103',
+    studentName: 'Ayman Chowdhury',
+    rollNumber: '103',
+    grade: 'Grade 5',
+    month: 'October 2026',
+    feeType: 'Tuition Fee' as const,
+    amount: 5500,
+    paidAmount: 3000,
+    dueDate: '2026-10-10',
+    status: 'Partial' as const,
+    paymentMethod: 'Bank Transfer' as const,
+    transactionId: 'EBL-44219',
+    paymentDate: '2026-10-08',
+  },
+  {
+    id: 'fee-104',
+    invoiceNo: 'INV-2026-104',
+    studentId: 'FLS-2026-104',
+    studentName: 'Maliha Rahman',
+    rollNumber: '104',
+    grade: 'Grade 10',
+    month: 'October 2026',
+    feeType: 'Tuition Fee' as const,
+    amount: 7500,
+    paidAmount: 0,
+    dueDate: '2026-10-10',
+    status: 'Unpaid' as const,
+  },
+  {
+    id: 'fee-105',
+    invoiceNo: 'INV-2026-105',
+    studentId: 'FLS-2026-105',
+    studentName: 'Rayan Chowdhury',
+    rollNumber: '105',
+    grade: 'Grade 7',
+    month: 'October 2026',
+    feeType: 'Tuition Fee' as const,
+    amount: 6500,
+    paidAmount: 6500,
+    dueDate: '2026-10-10',
+    status: 'Paid' as const,
+    paymentMethod: 'Cash Counter' as const,
+    paymentDate: '2026-10-04',
+  },
+];
+
+export const initialAttendanceList = [
+  { id: 'att-1', studentId: 'FLS-2026-101', studentName: 'Tahmid Hossain', rollNumber: '101', grade: 'Grade 7', section: 'A - Pioneers', date: '2026-10-28', status: 'Present' as const, timeIn: '07:55 AM' },
+  { id: 'att-2', studentId: 'FLS-2026-102', studentName: 'Samira Anjum', rollNumber: '102', grade: 'Grade 7', section: 'A - Pioneers', date: '2026-10-28', status: 'Present' as const, timeIn: '07:50 AM' },
+  { id: 'att-3', studentId: 'FLS-2026-103', studentName: 'Ayman Chowdhury', rollNumber: '103', grade: 'Grade 5', section: 'A - Explorers', date: '2026-10-28', status: 'Late' as const, timeIn: '08:15 AM' },
+  { id: 'att-4', studentId: 'FLS-2026-104', studentName: 'Maliha Rahman', rollNumber: '104', grade: 'Grade 10', section: 'Science Track', date: '2026-10-28', status: 'Absent' as const },
+  { id: 'att-5', studentId: 'FLS-2026-105', studentName: 'Rayan Chowdhury', rollNumber: '105', grade: 'Grade 7', section: 'A - Pioneers', date: '2026-10-28', status: 'Present' as const, timeIn: '07:58 AM' },
+];
+
+export const initialLibraryBooks = [
+  { id: 'bk-1', code: 'LIB-SCI-101', title: 'Principles of Physics & Astronomy', author: 'Halliday & Resnick', category: 'Science', totalCopies: 15, availableCopies: 12, shelfNo: 'Shelf B-3' },
+  { id: 'bk-2', code: 'LIB-MATH-202', title: 'Higher Algebra & Trigonometry', author: 'Dr. M. A. Jabbar', category: 'Mathematics', totalCopies: 20, availableCopies: 16, shelfNo: 'Shelf A-1' },
+  { id: 'bk-3', code: 'LIB-ENG-305', title: 'The Oxford Illustrated English Literature', author: 'Margaret Drabble', category: 'Literature', totalCopies: 12, availableCopies: 9, shelfNo: 'Shelf C-2' },
+  { id: 'bk-4', code: 'LIB-ICT-410', title: 'Python Programming for Young Minds', author: 'Eric Matthes', category: 'Computer Science', totalCopies: 25, availableCopies: 18, shelfNo: 'Shelf D-4' },
+  { id: 'bk-5', code: 'LIB-BGS-501', title: 'History & Heritage of Bangladesh', author: 'Prof. Sirajul Islam', category: 'Social Studies', totalCopies: 18, availableCopies: 14, shelfNo: 'Shelf E-1' },
+];
+
+export const initialBookIssues = [
+  { id: 'iss-1', bookTitle: 'Python Programming for Young Minds', bookCode: 'LIB-ICT-410', studentName: 'Tahmid Hossain', studentId: 'FLS-2026-101', rollNumber: '101', issueDate: '2026-10-20', dueDate: '2026-11-04', status: 'Active' as const },
+  { id: 'iss-2', bookTitle: 'Principles of Physics & Astronomy', bookCode: 'LIB-SCI-101', studentName: 'Samira Anjum', studentId: 'FLS-2026-102', rollNumber: '102', issueDate: '2026-10-18', dueDate: '2026-11-02', status: 'Active' as const },
+  { id: 'iss-3', bookTitle: 'The Oxford Illustrated English Literature', bookCode: 'LIB-ENG-305', studentName: 'Ayman Chowdhury', studentId: 'FLS-2026-103', rollNumber: '103', issueDate: '2026-10-10', dueDate: '2026-10-24', status: 'Overdue' as const },
+];
+
+export const initialTransportRoutes = [
+  { id: 'rt-1', busNo: 'FLS-BUS-01', routeName: 'Uttara – Mirpur Express', driverName: 'Md. Delwar Hossain', driverPhone: '+880 1711-223301', capacity: 36, assignedStudents: 32, monthlyFee: 2500, stops: ['Sector 7', 'Sector 11', 'House Building', 'Mirpur 10', 'School Campus'] },
+  { id: 'rt-2', busNo: 'FLS-BUS-02', routeName: 'Dhanmondi – Mohammadpur Track', driverName: 'Abdul Karim', driverPhone: '+880 1711-223302', capacity: 36, assignedStudents: 29, monthlyFee: 2800, stops: ['Dhanmondi 27', 'Asad Gate', 'Japan Garden City', 'Ring Road', 'School Campus'] },
+  { id: 'rt-3', busNo: 'FLS-BUS-03', routeName: 'Gulshan – Banani – Badda Route', driverName: 'Rafiqul Islam', driverPhone: '+880 1711-223303', capacity: 32, assignedStudents: 28, monthlyFee: 3000, stops: ['Banani 11', 'Gulshan 2 Circle', 'Notun Bazar', 'Badda Link', 'School Campus'] },
+];
+
+export const initialSmsLogs = [
+  { id: 'sms-1', audience: 'All Parents', message: 'Dear Parents, Term 1 Mid-Term Examination schedule has been published online. Check the website portal for subject dates.', date: '2026-10-25 10:30 AM', recipientsCount: 420, status: 'Delivered' as const },
+  { id: 'sms-2', audience: 'Grade 7 Parents', message: 'Friendly reminder: Science lab project submission due by Oct 31, 2026. Please check your child study plan.', date: '2026-10-22 02:15 PM', recipientsCount: 75, status: 'Delivered' as const },
+  { id: 'sms-3', audience: 'Fee Due Students', message: 'Urgent: October monthly tuition fee deadline is Oct 10. Kindly clear pending balance to avoid late fee.', date: '2026-10-09 09:00 AM', recipientsCount: 38, status: 'Delivered' as const },
+];
+

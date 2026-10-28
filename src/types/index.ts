@@ -180,3 +180,77 @@ export interface AdminApplicationItem {
   status: 'Pending Review' | 'Interview Scheduled' | 'Approved' | 'Declined';
   notes: string;
 }
+
+export interface FeeRecord {
+  id: string;
+  invoiceNo: string;
+  studentId: string;
+  studentName: string;
+  rollNumber: string;
+  grade: string;
+  month: string;
+  feeType: 'Tuition Fee' | 'Admission Fee' | 'Exam Fee' | 'Transport Fee' | 'Annual Session Fee';
+  amount: number;
+  paidAmount: number;
+  dueDate: string;
+  status: 'Paid' | 'Partial' | 'Unpaid';
+  paymentMethod?: 'bKash' | 'Nagad' | 'Bank Transfer' | 'Cash Counter';
+  transactionId?: string;
+  paymentDate?: string;
+}
+
+export interface AttendanceRecord {
+  id: string;
+  studentId: string;
+  studentName: string;
+  rollNumber: string;
+  grade: string;
+  section: string;
+  date: string;
+  status: 'Present' | 'Absent' | 'Late' | 'Leave';
+  timeIn?: string;
+}
+
+export interface LibraryBook {
+  id: string;
+  code: string;
+  title: string;
+  author: string;
+  category: string;
+  totalCopies: number;
+  availableCopies: number;
+  shelfNo: string;
+}
+
+export interface BookIssueRecord {
+  id: string;
+  bookTitle: string;
+  bookCode: string;
+  studentName: string;
+  studentId: string;
+  rollNumber: string;
+  issueDate: string;
+  dueDate: string;
+  status: 'Active' | 'Returned' | 'Overdue';
+}
+
+export interface TransportRoute {
+  id: string;
+  busNo: string;
+  routeName: string;
+  driverName: string;
+  driverPhone: string;
+  capacity: number;
+  assignedStudents: number;
+  monthlyFee: number;
+  stops: string[];
+}
+
+export interface SmsBroadcast {
+  id: string;
+  audience: string;
+  message: string;
+  date: string;
+  recipientsCount: number;
+  status: 'Delivered' | 'Pending' | 'Scheduled';
+}
