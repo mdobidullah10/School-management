@@ -18,7 +18,10 @@ import { AdminPage } from './pages/AdminPage';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
+  const isAdminRoute =
+    location.pathname.startsWith('/admin') ||
+    location.pathname.startsWith('/dashboard') ||
+    location.pathname.startsWith('/super-admin');
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#18263A] antialiased">
@@ -36,6 +39,8 @@ const AppContent: React.FC = () => {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/study-plan" element={<StudyPlanPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/dashboard" element={<AdminPage />} />
+          <Route path="/super-admin" element={<AdminPage />} />
           {/* Catch-all redirect to Home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

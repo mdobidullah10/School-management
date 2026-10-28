@@ -29,11 +29,11 @@ export const Header: React.FC = () => {
     { name: 'Academics', path: '/academics' },
     { name: 'Study Plan', path: '/study-plan' },
     { name: 'Results', path: '/results' },
+    { name: 'Dashboard', path: '/dashboard' },
     { name: 'Admissions', path: '/admissions' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'News & Events', path: '/news' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Portal', path: '/portal' },
   ];
 
   return (
@@ -116,6 +116,14 @@ export const Header: React.FC = () => {
           {/* Action Button & Admin Pill */}
           <div className="hidden xl:flex items-center gap-3">
             <Link
+              to="/dashboard"
+              className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#123B70] text-xs font-bold px-3.5 py-2.5 rounded-full shadow-xs transition-all duration-200"
+            >
+              <ShieldAlert className="w-3.5 h-3.5 text-[#123B70]" />
+              <span>Admin Dashboard</span>
+            </Link>
+
+            <Link
               to="/admissions"
               className="inline-flex items-center gap-2 bg-[#123B70] hover:bg-[#2167B2] text-white text-xs lg:text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#FFB800]"
             >
@@ -126,6 +134,12 @@ export const Header: React.FC = () => {
 
           {/* Tablet & Mobile Menu Button */}
           <div className="flex xl:hidden items-center gap-2">
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center text-[11px] font-bold bg-amber-400 text-[#123B70] px-2.5 py-1 rounded-full shadow-xs"
+            >
+              Dashboard
+            </Link>
             <Link
               to="/results"
               className="inline-flex items-center text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-1 rounded-full"

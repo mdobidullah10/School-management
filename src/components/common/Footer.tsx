@@ -113,6 +113,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/dashboard" className="text-[#FFB800] hover:underline font-bold transition-colors flex items-center gap-1.5">
+                  <span className="text-[#FFB800] text-xs">›</span> Super Admin Dashboard
+                </Link>
+              </li>
+              <li>
                 <Link to="/portal" className="hover:text-[#FFB800] transition-colors flex items-center gap-1.5">
                   <span className="text-[#FFB800] text-xs">›</span> Student & Parent Portal
                 </Link>
