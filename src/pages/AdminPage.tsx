@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   initialResults,
@@ -6,6 +6,7 @@ import {
   initialAdminApplications,
   schoolInfo,
 } from '../data/schoolData';
+import { fetchApplicationsForAdmin } from '../services/schoolService';
 import type {
   StudentResult,
   DailyStudyPlan,
@@ -45,6 +46,16 @@ export const AdminPage: React.FC = () => {
   const [resultsList, setResultsList] = useState<StudentResult[]>(initialResults);
   const [studyPlansList] = useState<DailyStudyPlan[]>(initialStudyPlans);
   const [appFilter, setAppFilter] = useState('All');
+  const [isLiveDbConnected, setIsLiveDbConnected] = useState(false);
+
+  useEffect(() => {
+    fetchApplicationsForAdmin().then(({ applications: loadedApps, isLiveDb }) => {
+      if (isLiveDb) {
+        setApplications(loadedApps);
+        setIsLiveDbConnected(true);
+      }
+    });
+  }, []);
 
   // New Result Modal State
   const [showAddResultModal, setShowAddResultModal] = useState(false);
@@ -209,6 +220,14 @@ export const AdminPage: React.FC = () => {
               </h1>
               <span className="bg-[#FFB800] text-[#123B70] px-2 py-0.5 rounded text-[10px] font-extrabold uppercase">
                 Super Admin
+              </span>
+              <span className={`text-[10px] px-2 py-0.5 rounded border font-semibold flex items-center gap-1 ${
+                isLiveDbConnected
+                  ? 'text-emerald-300 bg-emerald-950/80 border-emerald-700/60'
+                  : 'text-amber-300 bg-amber-950/80 border-amber-700/60'
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${isLiveDbConnected ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`}></span>
+                {isLiveDbConnected ? 'Supabase Live' : 'Supabase Configured'}
               </span>
             </div>
             <p className="text-[10px] text-slate-300">

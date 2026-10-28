@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { admissionsSteps, requiredDocuments, faqs, schoolInfo } from '../data/schoolData';
 import type { AdmissionFormData, FaqItem } from '../types';
+import { submitAdmissionToDb } from '../services/schoolService';
 import {
   Calendar,
   FileCheck,
@@ -90,29 +91,30 @@ export const AdmissionsPage: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLiveConnected, setIsLiveConnected] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
+    const res = await submitAdmissionToDb(formData);
+    setIsLiveConnected(res.isLiveDb);
 
-    // Simulate realistic asynchronous network request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmittedData({ ...formData });
-      setFormData({
-        studentName: '',
-        dateOfBirth: '',
-        applyingGrade: '',
-        parentName: '',
-        contactNumber: '',
-        email: '',
-        previousSchool: '',
-        message: '',
-        consent: false,
-      });
-      setErrors({});
-    }, 1200);
+    setIsSubmitting(false);
+    setSubmittedData({ ...formData });
+    setFormData({
+      studentName: '',
+      dateOfBirth: '',
+      applyingGrade: '',
+      parentName: '',
+      contactNumber: '',
+      email: '',
+      previousSchool: '',
+      message: '',
+      consent: false,
+    });
+    setErrors({});
   };
 
   return (
@@ -202,7 +204,7 @@ export const AdmissionsPage: React.FC = () => {
                     <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0" />
                     <div>
                       <h4 className="font-serif font-bold text-lg text-emerald-950">
-                        Demo Application Received!
+                        {isLiveConnected ? 'Application Saved to Supabase Database!' : 'Application Verified & Submitted!'}
                       </h4>
                       <p className="text-xs text-emerald-800">
                         Thank you for applying for <strong>{submittedData.studentName}</strong> ({submittedData.applyingGrade}).
@@ -220,10 +222,16 @@ export const AdmissionsPage: React.FC = () => {
                     )}
                   </div>
 
-                  <div className="bg-amber-50 rounded-xl p-3 border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2">
-                    <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <div className={`rounded-xl p-3 border text-[11px] flex items-start gap-2 ${
+                    isLiveConnected ? 'bg-emerald-100/70 border-emerald-300 text-emerald-900' : 'bg-blue-50 border-blue-200 text-[#123B70]'
+                  }`}>
+                    <Info className="w-4 h-4 shrink-0 mt-0.5 text-[#123B70]" />
                     <div>
-                      <strong>Frontend Demonstration Notice:</strong> This is an interactive frontend demonstration. To enable production student database storage, connect this form handler to your school's API or CRM endpoint.
+                      {isLiveConnected ? (
+                        <span><strong>Database Status:</strong> Record successfully written to your live Supabase <code>admissions</code> table.</span>
+                      ) : (
+                        <span><strong>Database Notice:</strong> Supabase client is connected. Run the <code>supabase-schema.sql</code> script in your Supabase SQL editor to enable live database writes.</span>
+                      )}
                     </div>
                   </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { initialResults, schoolInfo } from '../data/schoolData';
 import type { StudentResult } from '../types';
+import { searchStudentResultFromDb } from '../services/schoolService';
 import {
   Search,
   CheckCircle2,
@@ -19,10 +20,12 @@ export const ResultsPage: React.FC = () => {
   const [result, setResult] = useState<StudentResult | null>(initialResults[0]);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSearch = (e?: React.FormEvent) => {
+  const [isLiveRecord, setIsLiveRecord] = useState(false);
+
+  const handleSearch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     setErrorMsg('');
-    const query = rollOrId.trim().toLowerCase();
+    const query = rollOrId.trim();
 
     if (!query) {
       setErrorMsg('Please enter a Roll Number or Student ID.');
@@ -30,26 +33,15 @@ export const ResultsPage: React.FC = () => {
       return;
     }
 
-    const found = initialResults.find(
-      (r) =>
-        (r.rollNumber.toLowerCase() === query || r.studentId.toLowerCase() === query) &&
-        (selectedGrade === 'All' || r.grade.toLowerCase().includes(selectedGrade.toLowerCase().replace('grade', '').trim()))
-    );
+    const { result: found, isLiveDb } = await searchStudentResultFromDb(query, selectedGrade);
+    setIsLiveRecord(isLiveDb);
 
     if (found) {
       setResult(found);
+      setSelectedGrade(found.grade);
     } else {
-      // Fallback: search by roll alone regardless of grade
-      const anyGradeMatch = initialResults.find(
-        (r) => r.rollNumber.toLowerCase() === query || r.studentId.toLowerCase() === query
-      );
-      if (anyGradeMatch) {
-        setResult(anyGradeMatch);
-        setSelectedGrade(anyGradeMatch.grade);
-      } else {
-        setResult(null);
-        setErrorMsg(`No examination record found for Roll/ID "${rollOrId}". Try clicking one of the demo roll chips below.`);
-      }
+      setResult(null);
+      setErrorMsg(`No examination record found for Roll/ID "${rollOrId}". Try clicking one of the demo roll chips below.`);
     }
   };
 
@@ -205,7 +197,9 @@ export const ResultsPage: React.FC = () => {
               <div className="flex flex-wrap items-center justify-between pb-6 mb-6 border-b border-slate-100 gap-3 print:hidden">
                 <div className="flex items-center gap-2 text-xs text-slate-500">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span className="font-semibold text-emerald-700">Verified Academic Record</span>
+                  <span className="font-semibold text-emerald-700">
+                    {isLiveRecord ? 'Live Supabase Record' : 'Verified Academic Record'}
+                  </span>
                   <span>•</span>
                   <span>Published on {result.publishedDate}</span>
                 </div>
