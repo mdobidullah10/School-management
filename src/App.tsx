@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { ScrollToTop } from './components/common/ScrollToTop';
@@ -18,16 +18,39 @@ import { TeachersPage } from './pages/TeachersPage';
 import { MobileLoginPage } from './pages/MobileLoginPage';
 import { StudentDashboardPage } from './pages/StudentDashboardPage';
 import { TeacherDashboardPage } from './pages/TeacherDashboardPage';
+import { ParentDashboardPage } from './pages/ParentDashboardPage';
 import { isNativeMobileApp, getCurrentUser } from './lib/auth';
+import { App as CapApp } from '@capacitor/app';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isNative = isNativeMobileApp();
   const currentUser = getCurrentUser();
+
+  // Android Native Hardware Back Button Handler
+  React.useEffect(() => {
+    let listener: any = null;
+    if (isNative) {
+      listener = CapApp.addListener('backButton', ({ canGoBack }) => {
+        if (location.pathname === '/' || location.pathname === '/login') {
+          CapApp.exitApp();
+        } else if (canGoBack) {
+          window.history.back();
+        } else {
+          navigate('/login');
+        }
+      });
+    }
+    return () => {
+      if (listener && listener.remove) listener.remove();
+    };
+  }, [isNative, location.pathname, navigate]);
 
   const isAppDashboardOrLogin =
     location.pathname === '/login' ||
     location.pathname === '/student-dashboard' ||
+    location.pathname === '/parent-dashboard' ||
     location.pathname === '/teacher-dashboard' ||
     location.pathname.startsWith('/admin') ||
     location.pathname.startsWith('/dashboard') ||
@@ -38,6 +61,7 @@ const AppContent: React.FC = () => {
     if (!currentUser) return <Navigate to="/login" replace />;
     if (currentUser.role === 'admin') return <Navigate to="/admin" replace />;
     if (currentUser.role === 'teacher') return <Navigate to="/teacher-dashboard" replace />;
+    if (currentUser.role === 'parent') return <Navigate to="/parent-dashboard" replace />;
     return <Navigate to="/student-dashboard" replace />;
   };
 
@@ -54,6 +78,7 @@ const AppContent: React.FC = () => {
           <Route path="/home-web" element={<HomePage />} />
           <Route path="/login" element={<MobileLoginPage />} />
           <Route path="/student-dashboard" element={<StudentDashboardPage />} />
+          <Route path="/parent-dashboard" element={<ParentDashboardPage />} />
           <Route path="/teacher-dashboard" element={<TeacherDashboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/academics" element={<AcademicsPage />} />
