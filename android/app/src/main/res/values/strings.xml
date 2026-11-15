@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Future Leaders School</string>
+    <string name="title_activity_main">Future Leaders School</string>
+    <string name="package_name">bd.edu.futureleadersschool</string>
+    <string name="custom_url_scheme">bd.edu.futureleadersschool</string>
+</resources>

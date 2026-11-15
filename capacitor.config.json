@@ -1,0 +1,6 @@
+{
+  "appId": "bd.edu.futureleadersschool",
+  "appName": "Future Leaders School",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
