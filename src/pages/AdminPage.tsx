@@ -69,7 +69,9 @@ import {
   Smartphone,
   FileText,
   Clock,
+  HeartHandshake,
 } from 'lucide-react';
+import { setCurrentUser } from '../lib/auth';
 
 const PRESET_AVATARS = [
   { label: 'Boy Student 1', url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80' },
@@ -954,7 +956,17 @@ export const AdminPage: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Quick Portal Switcher */}
+            <Link
+              to="/login"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-900 hover:bg-amber-100 transition-colors shadow-xs"
+              title="Open Student, Parent & Teacher Login Portal"
+            >
+              <Users className="w-3.5 h-3.5 text-[#F2B544]" />
+              <span>Portal Login</span>
+            </Link>
+
             <Link
               to="/results"
               target="_blank"
@@ -1225,6 +1237,51 @@ export const AdminPage: React.FC = () => {
 
                             <td className="py-3 px-4 text-right">
                               <div className="flex items-center justify-end gap-1.5">
+                                <Link
+                                  to="/student-dashboard"
+                                  onClick={() => {
+                                    setCurrentUser({
+                                      id: st.id,
+                                      name: st.studentName,
+                                      role: 'student',
+                                      identifier: st.studentId,
+                                      grade: st.grade,
+                                      section: st.section,
+                                      photo: st.studentPhoto,
+                                      phone: st.contactNumber,
+                                      parentName: st.parentName,
+                                      loginTime: Date.now(),
+                                    });
+                                  }}
+                                  className="px-2 py-1 rounded-lg bg-indigo-50 hover:bg-[#123B70] text-[#123B70] hover:text-white font-bold text-[10px] transition-colors inline-flex items-center gap-1 shadow-xs"
+                                  title="Open Student Portal as this student"
+                                >
+                                  <GraduationCap className="w-3 h-3 text-[#F2B544]" />
+                                  <span>Student View</span>
+                                </Link>
+
+                                <Link
+                                  to="/parent-dashboard"
+                                  onClick={() => {
+                                    setCurrentUser({
+                                      id: st.id,
+                                      name: st.parentName || `Guardian of ${st.studentName}`,
+                                      role: 'parent',
+                                      identifier: st.contactNumber || st.studentId,
+                                      grade: st.grade,
+                                      section: st.section,
+                                      phone: st.contactNumber,
+                                      parentName: st.parentName,
+                                      loginTime: Date.now(),
+                                    });
+                                  }}
+                                  className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-700 text-emerald-800 hover:text-white font-bold text-[10px] transition-colors inline-flex items-center gap-1 shadow-xs"
+                                  title="Open Parent Portal for this student's guardian"
+                                >
+                                  <HeartHandshake className="w-3 h-3 text-emerald-600" />
+                                  <span>Parent View</span>
+                                </Link>
+
                                 <button
                                   onClick={() => setViewingMarksheet(st)}
                                   className="p-1.5 rounded-lg bg-slate-100 hover:bg-[#123B70] hover:text-white text-slate-700 transition-colors cursor-pointer"
