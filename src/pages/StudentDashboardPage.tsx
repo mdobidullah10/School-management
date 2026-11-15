@@ -38,39 +38,39 @@ export const StudentDashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F5F8FC] pb-24 text-[#18263A]">
       {/* Top Mobile App Header */}
-      <div className="bg-gradient-to-r from-[#0B2345] via-[#123B70] to-[#2563A6] text-white p-5 pt-8 rounded-b-3xl shadow-lg">
+      <div className="app-header-gradient text-white p-5 pt-8 rounded-b-3xl shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-[#F2B544] flex items-center justify-center text-[#123B70] font-black">
               FLS
             </div>
             <div>
-              <span className="text-[10px] text-[#F2B544] font-bold uppercase tracking-wider block">Student App</span>
-              <h2 className="text-sm font-bold leading-tight">Future Leaders School</h2>
+              <span className="text-[10px] text-[#F2B544] font-extrabold uppercase tracking-wider block">Student App</span>
+              <h2 className="text-sm font-black leading-tight text-white">Future Leaders School</h2>
             </div>
           </div>
           <button
             onClick={handleLogout}
             title="Log Out"
-            className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
+            className="p-2 rounded-xl bg-white/20 hover:bg-white/30 text-white cursor-pointer transition-colors"
           >
             <LogOut className="w-4 h-4" />
           </button>
         </div>
 
         {/* Student Profile Overview Card */}
-        <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+        <div className="flex items-center gap-4 app-header-glass p-4 rounded-2xl">
           <img
             src={student.studentPhoto || 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80'}
             alt={student.studentName}
-            className="w-16 h-16 rounded-2xl object-cover border-2 border-[#F2B544] shadow-md"
+            className="w-16 h-16 rounded-2xl object-cover border-2 border-[#F2B544] shadow-md shrink-0"
           />
           <div className="flex-1">
-            <h1 className="text-base font-bold leading-tight text-white">{student.studentName}</h1>
-            <p className="text-xs text-slate-200 mt-0.5">
-              Class: <span className="font-semibold text-[#F2B544]">{student.grade} ({student.section})</span>
+            <h1 className="text-base font-black leading-tight text-white">{student.studentName}</h1>
+            <p className="text-xs text-slate-100 mt-0.5">
+              Class: <span className="font-bold text-[#F2B544]">{student.grade} ({student.section})</span>
             </p>
-            <div className="flex items-center gap-3 mt-1.5 text-[11px] text-slate-300">
+            <div className="flex items-center gap-3 mt-1.5 text-[11px] text-slate-200">
               <span>Roll: <strong className="text-white">#{student.rollNumber}</strong></span>
               <span>•</span>
               <span>ID: <strong className="text-white">{student.studentId}</strong></span>

@@ -67,37 +67,37 @@ export const TeacherDashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F5F8FC] pb-24 text-[#18263A]">
       {/* Top Mobile Teacher Header */}
-      <div className="bg-gradient-to-r from-[#0B2345] via-[#123B70] to-[#2563A6] text-white p-5 pt-8 rounded-b-3xl shadow-lg">
+      <div className="app-header-gradient text-white p-5 pt-8 rounded-b-3xl shadow-lg">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-[#F2B544] flex items-center justify-center text-[#123B70] font-black">
               FLS
             </div>
             <div>
-              <span className="text-[10px] text-[#F2B544] font-bold uppercase tracking-wider block">Faculty App</span>
-              <h2 className="text-sm font-bold leading-tight">Teacher Console</h2>
+              <span className="text-[10px] text-[#F2B544] font-extrabold uppercase tracking-wider block">Faculty App</span>
+              <h2 className="text-sm font-black leading-tight text-white">Teacher Console</h2>
             </div>
           </div>
           <button
             onClick={handleLogout}
             title="Log Out"
-            className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
+            className="p-2 rounded-xl bg-white/20 hover:bg-white/30 text-white cursor-pointer transition-colors"
           >
             <LogOut className="w-4 h-4" />
           </button>
         </div>
 
         {/* Teacher Overview Card */}
-        <div className="flex items-center gap-3.5 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+        <div className="flex items-center gap-3.5 app-header-glass p-4 rounded-2xl">
           <img
             src={authUser?.photo || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'}
             alt="Teacher"
-            className="w-14 h-14 rounded-2xl object-cover border-2 border-[#F2B544] shadow-md"
+            className="w-14 h-14 rounded-2xl object-cover border-2 border-[#F2B544] shadow-md shrink-0"
           />
           <div>
-            <h1 className="text-base font-bold text-white leading-tight">{authUser?.name || 'Dr. Farhana Ahmed'}</h1>
-            <p className="text-xs text-[#F2B544] font-semibold mt-0.5">{authUser?.designation || 'Senior Faculty & Dept Head'}</p>
-            <span className="text-[11px] text-slate-300 mt-1 block">Department: <strong>{authUser?.department || 'Mathematics & Sciences'}</strong></span>
+            <h1 className="text-base font-black text-white leading-tight">{authUser?.name || 'Dr. Farhana Ahmed'}</h1>
+            <p className="text-xs text-[#F2B544] font-bold mt-0.5">{authUser?.designation || 'Senior Faculty & Dept Head'}</p>
+            <span className="text-[11px] text-slate-200 mt-1 block">Department: <strong className="text-white">{authUser?.department || 'Mathematics & Sciences'}</strong></span>
           </div>
         </div>
       </div>

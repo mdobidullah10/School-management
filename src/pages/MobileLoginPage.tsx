@@ -99,7 +99,7 @@ export const MobileLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0B2345] via-[#123B70] to-[#0A192F] text-white flex flex-col justify-between p-4 sm:p-6">
+    <div className="min-h-screen app-login-gradient text-white flex flex-col justify-between p-4 sm:p-6">
       {/* Top Branding Section */}
       <div className="text-center pt-8 pb-4">
         <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-[#F2B544] to-amber-300 p-0.5 shadow-xl shadow-amber-500/20 mb-3 flex items-center justify-center">
