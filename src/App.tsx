@@ -11,25 +11,50 @@ import { AdmissionsPage } from './pages/AdmissionsPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { NewsEventsPage } from './pages/NewsEventsPage';
 import { ContactPage } from './pages/ContactPage';
-import { PortalPage } from './pages/PortalPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { StudyPlanPage } from './pages/StudyPlanPage';
 import { AdminPage } from './pages/AdminPage';
 import { TeachersPage } from './pages/TeachersPage';
+import { MobileLoginPage } from './pages/MobileLoginPage';
+import { StudentDashboardPage } from './pages/StudentDashboardPage';
+import { TeacherDashboardPage } from './pages/TeacherDashboardPage';
+import { isNativeMobileApp, getCurrentUser } from './lib/auth';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
-  const isAdminRoute =
+  const isNative = isNativeMobileApp();
+  const currentUser = getCurrentUser();
+
+  const isAppDashboardOrLogin =
+    location.pathname === '/login' ||
+    location.pathname === '/student-dashboard' ||
+    location.pathname === '/teacher-dashboard' ||
     location.pathname.startsWith('/admin') ||
     location.pathname.startsWith('/dashboard') ||
     location.pathname.startsWith('/super-admin');
 
+  // If running inside Native APK and at root "/", determine landing page
+  const getInitialNativeRedirect = () => {
+    if (!currentUser) return <Navigate to="/login" replace />;
+    if (currentUser.role === 'admin') return <Navigate to="/admin" replace />;
+    if (currentUser.role === 'teacher') return <Navigate to="/teacher-dashboard" replace />;
+    return <Navigate to="/student-dashboard" replace />;
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#18263A] antialiased">
-      {!isAdminRoute && <Header />}
+      {!isAppDashboardOrLogin && <Header />}
       <main className="flex-1 w-full">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          {/* In Native App mode, direct root to app login/dashboard */}
+          <Route
+            path="/"
+            element={isNative ? getInitialNativeRedirect() : <HomePage />}
+          />
+          <Route path="/home-web" element={<HomePage />} />
+          <Route path="/login" element={<MobileLoginPage />} />
+          <Route path="/student-dashboard" element={<StudentDashboardPage />} />
+          <Route path="/teacher-dashboard" element={<TeacherDashboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/academics" element={<AcademicsPage />} />
           <Route path="/teachers" element={<TeachersPage />} />
@@ -38,17 +63,17 @@ const AppContent: React.FC = () => {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/news" element={<NewsEventsPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/portal" element={<PortalPage />} />
+          <Route path="/portal" element={<MobileLoginPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/study-plan" element={<StudyPlanPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/dashboard" element={<AdminPage />} />
           <Route path="/super-admin" element={<AdminPage />} />
-          {/* Catch-all redirect to Home */}
+          {/* Catch-all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      {!isAdminRoute && <Footer />}
+      {!isAppDashboardOrLogin && <Footer />}
     </div>
   );
 };
