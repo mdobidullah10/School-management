@@ -19,14 +19,13 @@ import { MobileLoginPage } from './pages/MobileLoginPage';
 import { StudentDashboardPage } from './pages/StudentDashboardPage';
 import { TeacherDashboardPage } from './pages/TeacherDashboardPage';
 import { ParentDashboardPage } from './pages/ParentDashboardPage';
-import { isNativeMobileApp, getCurrentUser } from './lib/auth';
+import { isNativeMobileApp } from './lib/auth';
 import { App as CapApp } from '@capacitor/app';
 
 const AppContent: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isNative = isNativeMobileApp();
-  const currentUser = getCurrentUser();
 
   // Android Native Hardware Back Button Handler
   React.useEffect(() => {
@@ -56,24 +55,16 @@ const AppContent: React.FC = () => {
     location.pathname.startsWith('/dashboard') ||
     location.pathname.startsWith('/super-admin');
 
-  // If running inside Native APK and at root "/", determine landing page
-  const getInitialNativeRedirect = () => {
-    if (!currentUser) return <Navigate to="/login" replace />;
-    if (currentUser.role === 'admin') return <Navigate to="/admin" replace />;
-    if (currentUser.role === 'teacher') return <Navigate to="/teacher-dashboard" replace />;
-    if (currentUser.role === 'parent') return <Navigate to="/parent-dashboard" replace />;
-    return <Navigate to="/student-dashboard" replace />;
-  };
-
+  // In Native App mode, direct root "/" directly to the 4-role login selection portal
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#18263A] antialiased">
       {!isAppDashboardOrLogin && <Header />}
       <main className="flex-1 w-full">
         <Routes>
-          {/* In Native App mode, direct root to app login/dashboard */}
+          {/* In Native App mode, direct root directly to /login */}
           <Route
             path="/"
-            element={isNative ? getInitialNativeRedirect() : <HomePage />}
+            element={isNative ? <Navigate to="/login" replace /> : <HomePage />}
           />
           <Route path="/home-web" element={<HomePage />} />
           <Route path="/login" element={<MobileLoginPage />} />

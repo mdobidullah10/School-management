@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   initialStudyPlans,
   allFacultyAndStaff,
@@ -71,7 +71,7 @@ import {
   Clock,
   HeartHandshake,
 } from 'lucide-react';
-import { setCurrentUser } from '../lib/auth';
+import { setCurrentUser, getCurrentUser, logoutUser } from '../lib/auth';
 
 const PRESET_AVATARS = [
   { label: 'Boy Student 1', url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80' },
@@ -103,9 +103,19 @@ function calculateGrade(obtained: number, full: number = 100): { grade: string; 
 }
 
 export const AdminPage: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const navigate = useNavigate();
+  const authUser = getCurrentUser();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    authUser?.role === 'admin'
+  );
   const [adminEmail, setAdminEmail] = useState('admin@futureleadersschool.edu.bd');
   const [adminPass, setAdminPass] = useState('superadmin2026');
+
+  const handleAdminLogout = () => {
+    logoutUser();
+    setIsAuthenticated(false);
+    navigate('/login');
+  };
 
   // Active admin tab: expanded with all new requested modules!
   const [activeTab, setActiveTab] = useState<
@@ -606,6 +616,14 @@ export const AdminPage: React.FC = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              setCurrentUser({
+                id: 'admin-super-1',
+                name: 'Super Admin',
+                role: 'admin',
+                identifier: adminEmail,
+                designation: 'Executive Principal & Administrator',
+                loginTime: Date.now(),
+              });
               setIsAuthenticated(true);
             }}
             className="space-y-4"
@@ -634,6 +652,15 @@ export const AdminPage: React.FC = () => {
             >
               Sign In to Admin Portal
             </button>
+            <div className="pt-2 text-center">
+              <Link
+                to="/login"
+                className="text-xs text-[#2563A6] hover:underline font-bold inline-flex items-center gap-1"
+              >
+                <span>Switch to Student / Parent / Teacher Login</span>
+                <Users className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </form>
         </div>
       </div>
@@ -909,7 +936,7 @@ export const AdminPage: React.FC = () => {
               <span>Public Site</span>
             </Link>
             <button
-              onClick={() => setIsAuthenticated(false)}
+              onClick={handleAdminLogout}
               className="hover:text-rose-400 flex items-center gap-1 cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -984,6 +1011,16 @@ export const AdminPage: React.FC = () => {
               <span>View Website</span>
               <ExternalLink className="w-3 h-3 text-[#F2B544]" />
             </Link>
+
+            {/* Logout button */}
+            <button
+              onClick={handleAdminLogout}
+              className="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl transition-all shadow-xs cursor-pointer"
+              title="Sign Out from Super Admin"
+            >
+              <LogOut className="w-3 h-3 text-rose-600" />
+              <span>Sign Out</span>
+            </button>
           </div>
         </header>
 
