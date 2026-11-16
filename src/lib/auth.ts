@@ -97,7 +97,7 @@ export async function authenticateUser(
       setCurrentUser(adminUser);
       return { success: true, user: adminUser };
     }
-    return { success: false, message: 'Invalid Admin credentials. Try default: admin123' };
+    return { success: false, message: 'Invalid Admin ID or password. Please try again.' };
   }
 
   // 2. TEACHER LOGIN
